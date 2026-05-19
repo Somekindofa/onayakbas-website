@@ -1,0 +1,114 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+function ytId(url: string): string {
+  const m = url.match(/(?:v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+  return m ? m[1] : url;
+}
+
+const allMedia      = await getCollection('media');
+const localVideos   = allMedia.filter(m => m.data.type === 'local');
+const youtubeVideos = allMedia.filter(m => m.data.type === 'youtube');
+---
+<Layout title="Media — Onay Akbaş" lang="en">
+  <h2 class="page-title">Media</h2>
+
+  <section class="section">
+    <h3 class="section-title">Videos</h3>
+    <div class="video-list">
+      {localVideos.map(v => (
+        <div class="video-item">
+          <video controls preload="metadata">
+            <source src={v.data.video_file} type="video/mp4" />
+          </video>
+          <p class="video-label">{v.data.label}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <h3 class="section-title">Documentaries &amp; Interviews</h3>
+    <div class="yt-grid">
+      {youtubeVideos.map(v => (
+        <div class="yt-item">
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${ytId(v.data.youtube_url!)}?rel=0`}
+            title={v.data.label}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+      ))}
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 2rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 2.5rem;
+  }
+
+  .section {
+    margin-bottom: 4rem;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 1.1rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.4rem;
+    margin-bottom: 2rem;
+  }
+
+  .video-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+    gap: 2.5rem;
+  }
+
+  .video-item video {
+    width: 100%;
+    display: block;
+    background: #1a1a1a;
+  }
+
+  .video-label {
+    margin-top: 0.6rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .yt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .yt-item {
+    aspect-ratio: 16 / 9;
+    background: #1a1a1a;
+  }
+
+  .yt-item iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+
+  @media (max-width: 600px) {
+    .video-list { grid-template-columns: 1fr; }
+    .yt-grid { grid-template-columns: 1fr; }
+  }
+</style>

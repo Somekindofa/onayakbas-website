@@ -1,0 +1,190 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getEntry } from 'astro:content';
+
+const bio = await getEntry('bio', 'bio-events');
+const { solo_exhibitions, group_exhibitions, art_fairs, awards, portrait } = bio!.data;
+---
+<Layout title="Biographie — Onay Akbaş" lang="fr">
+  <div class="bio-layout">
+    <aside>
+      <img src={portrait ?? '/images/OnayAkbas_photo.jpg'} alt="Onay Akbaş" class="portrait" />
+      <div class="cv-summary">
+        <p>1964 — Né à Fatsa</p>
+        <p>1977–80 — Lycée Abdurrahman Paşa, Kastamonu</p>
+        <p>1980–85 — Diplômé de la Faculté des Beaux-Arts de l'Université de Marmara</p>
+        <p>Depuis 1988 — Travaille à Paris</p>
+      </div>
+    </aside>
+    <article>
+      <h2 class="page-title">Biographie</h2>
+
+      <section class="narrative">
+        <p><strong>1963</strong> &nbsp;Onay Akbaş naît dans la petite ville de Fatsa, au bord de la Mer Noire, en Anatolie. Son arrière-grand-père et son grand-père paternels ont été soldats dans le détroit des Dardanelles. En garnison dans le port d'Akbaş (le mot signifie Tête blanche), connue pour ses hôpitaux militaires dans tout l'Empire Ottoman, ils en ont adopté le nom. Onay est le cinquième enfant de Şükrü Akbaş, qui en aura sept. L'homme est religieux, intellectuel et républicain. La famille Akbaş possède des verges de noisetiers, qui sont les premiers terrains de jeux des enfants.</p>
+
+        <p><strong>1973</strong> &nbsp;Mort du chef de famille. L'histoire de la Turquie est alors très troublée. Fatsa est un lieu d'affrontements réguliers entre les nationalistes du pays et des groupes régionaux, sympathisants de gauche. Demeurée seule à l'âge de trente-trois ans, Hamiye, la mère de l'artiste, élève ses enfants. Ils l'assistent pour la récolte des noisettes. Tous feront ensuite des études supérieures, conformément à la volonté de leur père. Onay décroche le concours d'entrée au collège-lycée Abdurrahman Paşa à Kastamonu, ancienne cité princière richement construite en bois, à trois cents kilomètres d'Istanbul. L'enfant, lauréat d'une bourse, passe là six ans. Il est brillant en sciences et en dessin, discipline dans laquelle il devient l'élève privilégié de son professeur, Sait Civcioglu.</p>
+
+        <p><strong>1978</strong> &nbsp;Onay obtient le Deuxième Prix National de Dessin. Son frère aîné, Ibrahim, instituteur, meurt, victime d'un guet-apens politique, à l'âge de vingt-deux ans.</p>
+
+        <p><strong>1979</strong> &nbsp;Onay est renvoyé du lycée, en raison d'activités politiques. La situation du pays est alors plus agitée que jamais, à quelques mois d'un coup d'état. Tandis que les émeutes se multiplient, le jeune homme passe son baccalauréat à Fatsa et l'obtient. Souhaitant devenir cosmonaute, il se présente à l'Université d'astronomie et de technologie. Mais il est refusé.</p>
+
+        <p><strong>1980</strong> &nbsp;Il intègre l'Université Marmara d'Istanbul, pour étudier la peinture et devenir professeur de dessin et d'histoire de l'art. Il séjourne en prison, comme nombre d'étudiants, régulièrement raflés par la police. Atteint de tuberculose, il passe quatre mois en sanatorium.</p>
+
+        <p><strong>1983</strong> &nbsp;Diplômé de l'Université, il s'installe, avec une quinzaine d'autres jeunes artistes, dans le quartier de Maltepe, sur la rive asiatique d'Istanbul. Tous vivent, au début, de petits boulots de décor ou de graphisme. Les "Maltepe" sont à la capitale turque ce que les peintres de Montmartre ou de Montparnasse ont été à Paris. En Turquie, un tel phénomène est nouveau. Onay vit dans une petite boutique transformée en atelier. Un rideau, acheté avec une première toile vendue, dissimule le lit. Dans la vitrine, le jeune homme présente ses toiles, qu'il vend à très bon marché. Elles sont inspirées par la grande peinture classique étudiée à l'Université et font en particulier référence à Caravage, à Rembrandt. Il s'agit d'œuvres intimistes : des scènes de genre, des natures mortes et des représentations d'animaux. Onay participe pour la première fois à une exposition collective dans une institution officielle : le musée des beaux-arts d'Izmir.</p>
+
+        <p><strong>1986</strong> &nbsp;Il expose à la Dört Boyut Art Gallery à Istanbul.</p>
+
+        <p><strong>1987</strong> &nbsp;Service militaire : Onay enseigne le dessin au lycée militaire d'Izmir. Il expose au Festival de la Culture et du Tourisme de Bandırma (Turquie). Il y reçoit le Prix de Peinture.</p>
+
+        <p><strong>1988</strong> &nbsp;Départ pour l'Europe. Akbaş séjourne en Italie, aux alentours du lac de Côme, puis en Suisse, où il retrouve l'une de ses sœurs, avant de s'installer à Paris. Nourri de littérature française durant ses études, il se précipite à Notre-Dame de Paris, en hommage à l'écrivain Victor Hugo, et à Auvers-sur-Oise, en hommage au peintre Van Gogh. Sur sa tombe, il dépose un pinceau. Onay vit d'abord dans la cave d'une épicerie turque, à Paris, puis dans un petit appartement, en banlieue, à Clichy. Il s'inscrit à l'Université d'arts plastiques de Paris VIII Saint-Denis, prend des cours de français, et rencontre l'amour, en la personne d'une jeune parisienne, d'origine turque, Emmanuelle Büyükkurnaz. Akbaş peint sur des cartons et des panneaux de bois, ou de métal, récupérés ici ou là, avec les pinceaux et les couleurs qu'il a apportés de Turquie. Son style devient plus expressionniste. Il rencontre l'écrivain chilien Rafael Arenas, réfugié politique en France. Les deux hommes deviendront de grands amis. Mauricio Arenas, fils de l'écrivain, composera en 1991 <em>Contrasto</em> : une sonate pour violon et piano "d'après une peinture d'Onay Akbaş". L'autre fils, Pablo, cinéaste, réalisera deux films documentaires sur l'artiste.</p>
+
+        <p><strong>1989</strong> &nbsp;Rue de Montreuil à Paris, Akbaş montre ses peintures au directeur de la galerie Serio, qui présente du mobilier contemporain et des toiles de jeunes artistes inconnus. La galerie lui propose une première exposition personnelle, de très grands formats, sur le thème du bicentenaire de la Révolution Française. L'exposition est un succès. L'artiste gagne suffisamment d'argent pour vivre une année entière. Le public parisien est alors très enthousiaste et amateur de peinture dynamique, énergique, nouvelle.</p>
+
+        <p><strong>1990</strong> &nbsp;Deuxième exposition personnelle, au Centre Culturel Gérard Philippe de Noisy-le-Sec, en banlieue parisienne. Nouveau succès. La Mairie achète un Grand format, <em>L'Orchestre des Apôtres</em>, et un catalogue est publié. La galerie Antoine Candau, installée dans le quartier de la Bastille, repère l'artiste. Elle le présente lors d'un concours organisé, autour du vin du Beaujolais, par le commissaire-priseur Pierre Cornette de Saint-Cyr et son ami, un animateur de télévision très populaire et collectionneur d'art contemporain, Stéphane Collaro. Akbaş remporte le Prix. Il expose à la Galerie Vive l'Art à Lille, avec Combas, Di Rosa, et d'autres jeunes peintres déjà célèbres, membres du groupe Figuration Libre. Il participe aussi à l'exposition Peintres Turcs de Paris, à Paris (Espace AGF), et à une exposition collective au Centre d'art contemporain de Caddebostan, à Istanbul. À cette occasion, il rencontre le poète Sunay Akın. Les deux hommes deviendront de grands amis.</p>
+
+        <p><strong>1991</strong> &nbsp;Avec Emmanuelle, qu'il vient d'épouser, Akbaş s'installe à Paris dans le quartier de Ménilmontant, où il rejoint le groupe Le Chaînon Manquant, avec les peintres Gauthier, Doublier, et l'Argentin Aznar, qui devient un grand ami. Ils organisent des expositions dans des lieux alternatifs, et créent leur propre galerie. Ils y présentent leurs travaux, ainsi que ceux d'artistes singuliers, comme Éliane Larus, Michel Macréau ou Mario Murua. Akbaş se plonge dans l'étude des arts anciens du Monde, de Mésopotamie, d'Océanie et d'Amérique précolombienne en particulier. Il se passionne également pour les graffitis et pour les jeunes artistes qui s'en inspirent, comme l'Américain Basquiat. La peinture d'Akbaş évolue, se simplifie et ignore désormais la perspective classique. Les formes, très colorées, se déploient en deux dimensions. Il commence la série des Épouvantails. À Istanbul, la galerie Alkent Art publie un catalogue consacré aux œuvres d'Akbaş. Exposition personnelle au Centre Culturel Anatolie, à Paris. Et participation à l'exposition Sept Peintres Turcs, à Nancy (France).</p>
+
+        <p><strong>1992</strong> &nbsp;Début de la série consacrée au Monde Théâtre. Désormais l'artiste, qui vient d'adopter la nationalité française, va procéder par cycles. Un thème s'impose, toujours lié au monde perçu comme une représentation, à la vie montrée comme une manipulation. Et ce thème est ensuite décliné pendant quelques années, jusqu'à ce qu'un nouveau sujet surgisse. La manière d'Akbaş demeure très colorée. Les formes représentées, simples et géométriques, sont animées de motifs lumineux. Les êtres mis en scène sont poétiques et ludiques, les situations, ironiques. Le panda, allégorie de l'innocence en voie de disparition, devient un animal fétiche. Son regard rond inspirera désormais celui des personnages représentés. Expositions personnelles à la Galerie Serio (Paris) et à la Galerie Le Soleil Bleu (Versailles). Exposition au Salon d'Automne (Paris), à la galerie Vive l'Art (Lille), et dans le cadre de l'événement Peintures Turcs (Paris).</p>
+
+        <p><strong>1993</strong> &nbsp;Nouvelle installation en banlieue parisienne, à Gennevilliers, au moment de la naissance du premier enfant de l'artiste, une fille, Daphnée. Deux expositions personnelles se déroulent à Istanbul, au Kadiköy Culturel Center, et à l'Alkent Actuel Art Gallery qui à cette occasion publie un catalogue (textes signés Rafael Arenas, J.C. Aznar, Nedim Gürsel et Guy Noël). Nombreuses expositions collectives.</p>
+
+        <p><strong>1994</strong> &nbsp;Nouvel emménagement à Paris, près du métro Voltaire. Exposition personnelle à Zürich (Galerie Schneider). Participe à l'événement Le Génie de la Bastille (Paris) et à l'International Contemporary Art Fair (Genève). Entame une correspondance avec le critique d'art Kaya Özsezgin. Ces échanges se transformeront, au fil des années, en amitié.</p>
+
+        <p><strong>1995</strong> &nbsp;Début de la série <em>Les Faux Prophètes</em>. Exposition personnelle à Istanbul avec parution d'un catalogue (Alkent Actuel Art Gallery). Rencontre avec la critique d'art Françoise Monnin, qui devient une amie. Elle évoque le travail d'Akbaş dans différents articles et textes, notamment dans l'ouvrage <em>L'Art Brut</em> (éditions Scala, 1997).</p>
+
+        <p><strong>1996</strong> &nbsp;Début des séries consacrées au Jeu, au Théâtre puis au Cinéma. Expositions personnelles en France, à Metz (Galerie Le Soleil Bleu) et à Aubergenville (rétrospective Dix ans de peinture) ; à Istanbul, Alkent Actuel Art Gallery.</p>
+
+        <p><strong>1997</strong> &nbsp;Exposition personnelle galerie Artfakt (Allemagne). La galerie Alkent publie un nouveau catalogue (texte par Frédéric Amblard).</p>
+
+        <p><strong>1998</strong> &nbsp;Expositions personnelles au Touquet (France), Galerie Fardel, et à Istanbul (Alkent Art Gallery). Invité d'honneur à la 15e Biennale de Langres (France). Cette dernière publie un catalogue (texte : Françoise Monnin).</p>
+
+        <p><strong>1999</strong> &nbsp;Nouvel emménagement, toujours à Paris, près du métro Parmentier. C'est là que naît son second enfant, un fils, Théo. Akbaş organise l'exposition <em>Huit Artistes Turcs</em> à Paris (Espace des Blancs Manteaux). Le directeur de la galerie Artist, Dağhan Özil, entame une collaboration de grande ampleur avec l'artiste. Un premier catalogue est publié et les œuvres d'Akbaş figurent aux cimaises de cette galerie et de sa filiale à Berlin, aux côtés de pièces d'artistes mondialement célèbres, comme Ilya Kabakov, Jan Fabre ou Richard Serra. Une œuvre d'Akbaş figurera même en couverture du magazine <em>Artist</em> en 2007.</p>
+
+        <p><strong>2000</strong> &nbsp;Début de la série <em>L'Instant et la Mémoire</em>. Composées de manière diptyque, les œuvres combinent deux versions d'une même scène, l'une, multicolore (l'instant) et l'autre, monochrome (la mémoire). L'artiste achète un atelier à Paris et un à Istanbul. Deux monographies paraissent : l'une, écrite par Kaya Özsezgin et Françoise Monnin (Alkent Actual Art éditions) et l'autre, par Dominique de La Tour (Artist éditions).</p>
+
+        <p><strong>2001</strong> &nbsp;Le ministère de la culture français octroie à Akbaş un atelier parisien, situé dans le XIII<sup>e</sup> arrondissement. Expositions personnelles à la Galerie Regard Sud à Lyon, à la Halkbank Art Gallery (Ankara) et à la Bebek Art Gallery (Istanbul). L'Artist Gallery publie une monographie (texte : Dominique de La Tour).</p>
+
+        <p><strong>2007</strong> &nbsp;Début de la série <em>Les Inachevés</em>.</p>
+
+        <p><strong>2009</strong> &nbsp;Akbaş organise un itinéraire Van Gogh dans toute la France. À l'issue de ce voyage, auquel onze peintres et vingt-cinq intellectuels turcs participent, sont réalisés une exposition à Istanbul (Centre MKM) et un livre. Expositions personnelles à Ankara (Artist Gallery) et à Lyon (Galerie Regard Sud), dans le cadre de la Saison de la Turquie en France.</p>
+
+        <p><strong>2010</strong> &nbsp;Exposition personnelle à Paris, dans le cadre de la Saison de la Turquie en France. À cette occasion, parution de la monographie <em>Onay Akbaş, vingt-cinq ans de peinture</em> (texte Françoise Monnin).</p>
+
+        <p>À ce jour, l'artiste a participé à environ deux cents expositions et plusieurs centaines d'articles sont parus à son propos, dans différentes revues spécialisées — <em>Adam Sanat</em>, <em>Arkitekt</em>, <em>Artension</em>, <em>Artist</em>, <em>Arts Actualités Magazine</em>, <em>Connaissance des Arts</em>, <em>L'Œil</em>, <em>Milliyet Sanat</em>, <em>Muséart</em>, etc. — ainsi que dans les quotidiens <em>Cumhuriyet</em>, <em>Hürriyet</em>, <em>Milliyet</em>, <em>Le Figaro</em>, <em>Libération</em>, <em>Ouest-France</em>, et d'autres. Des documentaires télévisés ont été diffusés sur ATV, Canal 8, Kanal D, CNN, France 3, TRT, etc.</p>
+      </section>
+
+      <section class="cv-section">
+        <h3>Expositions solo <span class="note">(sélection)</span></h3>
+        <ul>
+          {solo_exhibitions.map(e => (
+            <li><span class="year">{e.year}</span> {e.venue}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="cv-section">
+        <h3>Expositions de groupe <span class="note">(sélection)</span></h3>
+        <ul>
+          {group_exhibitions.map(e => (
+            <li><span class="year">{e.year}</span> {e.venue}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="cv-section">
+        <h3>Prix <span class="note">(sélection)</span></h3>
+        <ul>
+          {awards.map(e => (
+            <li><span class="year">{e.year}</span> {e.venue}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="cv-section">
+        <h3>Collections</h3>
+        <p class="collections-note">Akbaş a obtenu de nombreux prix dans la création artistique. Plusieurs de ses œuvres sont aujourd'hui dispersées dans les collections privées, publiques et musées du monde entier.</p>
+      </section>
+    </article>
+  </div>
+</Layout>
+
+<style>
+  .bio-layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .portrait {
+    width: 100%;
+    display: block;
+    filter: grayscale(20%);
+    margin-bottom: 1.5rem;
+  }
+
+  .cv-summary {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.9;
+  }
+
+  .cv-summary p { margin: 0; }
+
+  .narrative p {
+    font-size: 0.95rem;
+    line-height: 1.85;
+    color: var(--text);
+    margin-bottom: 1.2rem;
+  }
+
+  .narrative p strong {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+  }
+
+  .cv-section {
+    margin-top: 3rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .note {
+    font-size: 0.8rem;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--muted);
+  }
+
+  .cv-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .cv-section li {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .year {
+    flex-shrink: 0;
+    width: 4.5rem;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .collections-note {
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 768px) {
+    .bio-layout { grid-template-columns: 1fr; }
+    .portrait { max-width: 240px; }
+  }
+</style>

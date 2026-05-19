@@ -1,0 +1,178 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getEntry } from 'astro:content';
+
+const bio = await getEntry('bio', 'bio-events');
+const { solo_exhibitions, group_exhibitions, art_fairs, awards, portrait } = bio!.data;
+---
+<Layout title="Biyografi — Onay Akbaş" lang="tr">
+  <div class="bio-layout">
+    <aside>
+      <img src={portrait ?? '/images/OnayAkbas_photo.jpg'} alt="Onay Akbaş" class="portrait" />
+      <div class="cv-summary">
+        <p>1 Mayıs 1964 — Fatsa doğumlu</p>
+        <p>1974–80 — Kastamonu Abdurrahman Paşa Lisesi</p>
+        <p>1980–85 — Marmara Üniversitesi Atatürk Eğitim Fakültesi, Resim Bölümü</p>
+        <p>1988'den itibaren — Paris'te çalışıyor</p>
+      </div>
+    </aside>
+    <article>
+      <h2 class="page-title">Biyografi</h2>
+
+      <section class="narrative">
+        <p>1 Mayıs 1964 tarihinde Fatsa'da doğdu. İlkokulu Fatsa'da bitirdi.</p>
+
+        <p>1974–1980 yılları arasında orta öğrenimini Kastamonu Abdurrahman Paşa Lisesi'nde gördü. Liseyi Fatsa Lisesi'nde tamamladı.</p>
+
+        <p>1980–85 yıllarında yüksek öğrenimini Marmara Üniversitesi Atatürk Eğitim Fakültesi Resim Bölümü'nde bitirdi.</p>
+
+        <p>1985 yılında İstanbul Maltepe semtinde ilk atölyesini açarak profesyonel sanat yaşamına atıldı. Burada daha sonra sanat çevresi tarafından "Maltepeli Ressamlar" olarak bilinen oluşumun kuruluşunda yer aldı.</p>
+
+        <p>1987 Bandırma Kuş Cenneti Festivali resim yarışmasında ödüle layık görüldü.</p>
+
+        <p>1987–1988 yılları arası İzmir Maltepe Askeri Lisesi'nde bir yıl resim öğretmenliği yaptı.</p>
+
+        <p>1988 yılında Paris'e yerleşerek ilk atölyesini açtı.</p>
+
+        <p>1989 Fransız Devrimi'nin 200. yıl kutlamaları çerçevesinde "Galerie Sério" Paris'te ilk kişisel sergisini düzenledi.</p>
+
+        <p>1991 Paris'te bir grup değişik milliyetlerden sanatçı ve kuramcısıyla beraber "Le Chaînon Manquant" adlı oluşumun kuruluşunda bulundu ve bu grup sanatçılarla başta birçok sanat fuarı olmak üzere çok sayıda karma manifestasyonlara katıldı. Bu grup Arjantinli ressam Aznar'ın ölümüyle faaliyetlerine son verdi.</p>
+
+        <p>1992 Fransa'da "Beaujolais" sanat ödülleri Resim birinciliği ödülüne layık görüldü.</p>
+
+        <p>1995–2005 yılları arasında Paris'te halen devam eden MAC 2000 adlı sanat fuarının 11 yıl boyunca danışmanlarından ve katılımcı sanatçılarından oldu.</p>
+
+        <p>2003–2006 Paris'te "Espace d'art contemporain l'autre" adlı kendi sanat galerisini açtı.</p>
+
+        <p>2007 Fransa'nın görsel sanatlar dalında en prestijli sanat ödülü "Marin" de jüri üyeliğinde bulundu.</p>
+
+        <p>2010 Fransa'da "Türkiye Yılı" kutlamaları resmi programı çerçevesinde "Lyon Bienali – Galerie Regard Sud" ve ardından "Galerie Crous des Beaux-Arts Paris"te iki kişisel sergi gerçekleştirdi.</p>
+
+        <p>1988'den bugüne, başta Art Miami, Art Zurich, Art Genève, MAC 2000 Paris, S'tart Strasbourg, MANIF Seoul, Art Taipei–Taïwan olmak üzere dünyanın birçok sanat fuarında sergilere katıldı.</p>
+
+        <p>Bugüne kadar birçok ülkede 50'nin üzerinde kişisel sergi düzenleyip çok sayıda karma sergilerde eserleri sergilendi. Dünyanın birçok özel ve tüzel koleksiyon ve müzelerinde eserleri bulunmaktadır. Birçok dilde basılmış sergi katalogları yanında İngilizce, Fransızca, Çince ve Türkçe olarak çeşitli sanat tarihçileri ve eleştirmenler tarafından sanatı hakkında yazılmış 4 adet kapsamlı kitabı bulunmaktadır.</p>
+
+        <p>Sanatı hakkında birçok ülkede TV, radyo programları, dergi ve gazetelerde çok sayıda röportajlar, makaleler, eleştiri ve analiz yazıları yayınlandı.</p>
+
+        <p>Sanatçı, Türkiye Gazeteciler Cemiyeti Sedat Simavi Ödülleri 2014 Görsel Sanatlar Ödülü sahibidir.</p>
+      </section>
+
+      <section class="cv-section">
+        <h3>Kişisel Sergiler <span class="note">(seçmeler)</span></h3>
+        <ul>
+          {solo_exhibitions.map(e => (
+            <li><span class="year">{e.year}</span> {e.venue}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="cv-section">
+        <h3>Karma Sergiler <span class="note">(seçmeler)</span></h3>
+        <ul>
+          {group_exhibitions.map(e => (
+            <li><span class="year">{e.year}</span> {e.venue}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="cv-section">
+        <h3>Fuarlar <span class="note">(seçmeler)</span></h3>
+        <ul>
+          {art_fairs.map(e => (
+            <li><span class="year">{e.year}</span> {e.venue}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="cv-section">
+        <h3>Ödüller <span class="note">(seçmeler)</span></h3>
+        <ul>
+          {awards.map(e => (
+            <li><span class="year">{e.year}</span> {e.venue}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="cv-section">
+        <h3>Koleksiyonlar</h3>
+        <p class="collections-note">Dünyanın önemli birçok özel, kamu, müze ve koleksiyonlarında çok sayıda eseri bulunmaktadır.</p>
+      </section>
+    </article>
+  </div>
+</Layout>
+
+<style>
+  .bio-layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .portrait {
+    width: 100%;
+    display: block;
+    filter: grayscale(20%);
+    margin-bottom: 1.5rem;
+  }
+
+  .cv-summary {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.9;
+  }
+
+  .cv-summary p { margin: 0; }
+
+  .narrative p {
+    font-size: 0.95rem;
+    line-height: 1.85;
+    color: var(--text);
+    margin-bottom: 1.2rem;
+  }
+
+  .cv-section {
+    margin-top: 3rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .note {
+    font-size: 0.8rem;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--muted);
+  }
+
+  .cv-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .cv-section li {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .year {
+    flex-shrink: 0;
+    width: 4.5rem;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .collections-note {
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 768px) {
+    .bio-layout { grid-template-columns: 1fr; }
+    .portrait { max-width: 240px; }
+  }
+</style>

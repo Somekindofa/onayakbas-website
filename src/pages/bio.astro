@@ -1,0 +1,139 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getEntry } from 'astro:content';
+
+const bio = await getEntry('bio', 'bio-events');
+const { solo_exhibitions, group_exhibitions, art_fairs, awards, portrait } = bio!.data;
+---
+<Layout title="Bio — Onay Akbaş" lang="en">
+  <div class="bio-layout">
+    <aside>
+      <img src={portrait ?? '/images/OnayAkbas_photo.jpg'} alt="Onay Akbaş" class="portrait" />
+      <div class="cv-summary">
+        <p>1964 — Born in Fatsa</p>
+        <p>1977–80 — Kastamonu Abdurrahman Paşa High School</p>
+        <p>1980 — Fatsa High School</p>
+        <p>1980–85 — Marmara University, Faculty of Fine Arts</p>
+        <p>1988 — Working as a professional artist in Paris</p>
+      </div>
+    </aside>
+    <article>
+      <h2 class="page-title">Biography</h2>
+
+      <section class="cv-section">
+        <h3>Solo Exhibitions <span class="note">(selected)</span></h3>
+        <ul>
+          {solo_exhibitions.map(e => (
+            <li><span class="year">{e.year}</span> {e.venue}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="cv-section">
+        <h3>Group Exhibitions <span class="note">(selected)</span></h3>
+        <ul>
+          {group_exhibitions.map(e => (
+            <li><span class="year">{e.year}</span> {e.venue}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="cv-section">
+        <h3>Art Fairs <span class="note">(selected)</span></h3>
+        <ul>
+          {art_fairs.map(e => (
+            <li><span class="year">{e.year}</span> {e.venue}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="cv-section">
+        <h3>Awards <span class="note">(selected)</span></h3>
+        <ul>
+          {awards.map(e => (
+            <li><span class="year">{e.year}</span> {e.venue}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="cv-section">
+        <h3>Collections</h3>
+        <p class="collections-note">Akbaş has received numerous awards in artistic creation. Thousands of his works are held in museum, gallery, and private collections worldwide.</p>
+      </section>
+    </article>
+  </div>
+</Layout>
+
+<style>
+  .bio-layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .portrait {
+    width: 100%;
+    display: block;
+    filter: grayscale(20%);
+    margin-bottom: 1.5rem;
+  }
+
+  .cv-summary {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.9;
+  }
+
+  .cv-summary p {
+    margin: 0;
+  }
+
+  .cv-section {
+    margin-bottom: 2.5rem;
+  }
+
+  .note {
+    font-size: 0.8rem;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--muted);
+  }
+
+  .cv-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .cv-section li {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .year {
+    flex-shrink: 0;
+    width: 4.5rem;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .collections-note {
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 768px) {
+    .bio-layout {
+      grid-template-columns: 1fr;
+    }
+    .portrait {
+      max-width: 240px;
+    }
+  }
+</style>

@@ -1,0 +1,413 @@
+---
+interface Props {
+  title: string;
+  lang: 'en' | 'fr' | 'tr';
+}
+const { title, lang } = Astro.props;
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Onay Akbaş — Artist" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
+    <header>
+      <a href={`/${lang === 'en' ? '' : lang}`} class="site-title">Onay Akbaş</a>
+      <nav>
+        <a href={lang === 'en' ? '/work'     : `/${lang}/work`}>{ lang === 'fr' ? 'Œuvres' : lang === 'tr' ? 'Eserler' : 'Work' }</a>
+        <a href={lang === 'en' ? '/bio'      : `/${lang}/bio`}>Bio</a>
+        <a href={lang === 'en' ? '/articles' : `/${lang}/articles`}>{ lang === 'fr' ? 'Articles' : lang === 'tr' ? 'Makaleler' : 'Articles' }</a>
+        <a href="/media">{ lang === 'fr' ? 'Médias' : lang === 'tr' ? 'Medya' : 'Media' }</a>
+        <a href={lang === 'en' ? '/contact'  : `/${lang}/contact`}>Contact</a>
+        <div class="lang-switcher">
+          <a href="/"    class={lang === 'en' ? 'active' : ''}>EN</a>
+          <a href="/fr"  class={lang === 'fr' ? 'active' : ''}>FR</a>
+          <a href="/tr"  class={lang === 'tr' ? 'active' : ''}>TR</a>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer>
+      <p class="footer-name">Onay Akbaş</p>
+      <p class="footer-copy">© {new Date().getFullYear()} — All rights reserved</p>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  #bg-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  :root {
+    /* Core palette — drawn from the paintings */
+    --bg:           #f4ede0;   /* warm linen */
+    --header-bg:    #2c3d3c;   /* deep forest teal */
+    --header-text:  #f4ede0;   /* linen on teal */
+    --text:         #2c2820;   /* warm dark brown */
+    --muted:        #8a7a6a;   /* warm taupe */
+    --border:       #d4c9b8;   /* warm sand */
+    --accent:       #c8943a;   /* golden ochre */
+    --teal:         #2a7c7a;   /* rich teal */
+    --sidebar-bg:   #ede5d5;   /* warm parchment */
+  }
+
+  body {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1.05rem;
+    font-weight: 400;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.7;
+  }
+
+  /* Keep content above canvas */
+  header, main, footer { position: relative; z-index: 1; }
+
+  /* ── Header ── */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.6rem 4rem;
+    background: var(--header-bg);
+  }
+
+  .site-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    color: var(--header-text);
+    transition: color 0.2s;
+  }
+
+  .site-title:hover { color: var(--accent); }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  nav > a {
+    text-decoration: none;
+    color: rgba(244, 237, 224, 0.75);
+    font-family: 'EB Garamond', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    position: relative;
+    padding-bottom: 2px;
+  }
+
+  nav > a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent);
+    transition: width 0.25s ease;
+  }
+
+  nav > a:hover {
+    color: var(--header-text);
+  }
+
+  nav > a:hover::after { width: 100%; }
+
+  /* ── Lang switcher ── */
+  .lang-switcher {
+    display: flex;
+    gap: 0.6rem;
+    border-left: 1px solid rgba(244, 237, 224, 0.2);
+    padding-left: 2rem;
+    margin-left: 0.5rem;
+  }
+
+  .lang-switcher a {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: rgba(244, 237, 224, 0.45);
+    transition: color 0.2s;
+  }
+
+  .lang-switcher a:hover   { color: var(--header-text); }
+  .lang-switcher a.active  { color: var(--accent); }
+
+  /* ── Main ── */
+  main {
+    flex: 1;
+    padding: 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* ── Footer ── */
+  footer {
+    background: var(--header-bg);
+    text-align: center;
+    padding: 2.5rem 2rem;
+  }
+
+  .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: var(--header-text);
+    margin-bottom: 0.4rem;
+  }
+
+  .footer-copy {
+    font-size: 0.8rem;
+    color: rgba(244, 237, 224, 0.4);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── Global typography helpers ── */
+  .page-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 2.2rem;
+    letter-spacing: 0.08em;
+    color: var(--header-bg);
+    margin-bottom: 2.5rem;
+  }
+
+  /* Section headings with teal left-rule */
+  .section-title,
+  .cv-section h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 1.05rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.4rem;
+    margin-bottom: 1.1rem;
+    padding-left: 0.75rem;
+    border-left: 3px solid var(--accent);
+  }
+
+  /* Links */
+  a { color: var(--teal); }
+  a:hover { color: var(--accent); }
+
+  @media (max-width: 768px) {
+    header  { padding: 1.25rem 1.5rem; flex-direction: column; gap: 1rem; }
+    main    { padding: 2rem 1.5rem; }
+    nav     { gap: 1.25rem; flex-wrap: wrap; justify-content: center; }
+    .lang-switcher { border-left: none; padding-left: 0; border-top: 1px solid rgba(244,237,224,0.2); padding-top: 0.75rem; margin-left: 0; }
+  }
+</style>
+
+<script>
+(function () {
+  const canvas = document.getElementById('bg-canvas') as HTMLCanvasElement | null;
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d')!;
+
+  // RGB triplets — custom palette
+  const palette: [number, number, number][] = [
+    [ 72,  91, 154],  // #485B9A — blue-violet
+    [216, 122,  88],  // #D87A58 — terracotta
+    [ 28, 138, 139],  // #1C8A8B — teal
+    [148, 186, 147],  // #94BA93 — sage green
+    [210, 197, 136],  // #D2C588 — warm straw
+    [211, 207, 212],  // #D3CFD4 — silver
+    [122,  41,  49],  // #7A2931 — deep red
+    [ 84,  76,  84],  // #544C54 — dark plum
+  ];
+
+  const EACH = 11;  // polygons per side
+
+  type Poly = {
+    side: 'left' | 'right';
+    verts: [number, number][];
+    // per-edge curve offset: 0 = straight, ±n = quadratic bulge magnitude
+    curves: number[];
+    r: number;
+    x: number; y: number;
+    vx: number; vy: number;
+    rot: number; rotSpd: number;
+    fill: string; stroke: string;
+  };
+
+  let W = 0, H = 0;
+  let polys: Poly[] = [];
+
+  function resize() {
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas!.width  = W;
+    canvas!.height = H;
+  }
+
+  // Zone width: outer band where polygons live
+  function zoneW() { return Math.min(210, W * 0.17); }
+  function innerEdge(side: 'left' | 'right') {
+    return side === 'left' ? zoneW() : W - zoneW();
+  }
+
+  // Slightly irregular polygon vertices — wobbled angle + radius
+  function makeVerts(edges: number, r: number): [number, number][] {
+    return Array.from({ length: edges }, (_, i) => {
+      const base  = (i / edges) * Math.PI * 2 - Math.PI / 2;
+      const angle = base + (Math.random() - 0.5) * 0.55;
+      const rad   = r * (0.68 + Math.random() * 0.58);
+      return [Math.cos(angle) * rad, Math.sin(angle) * rad];
+    });
+  }
+
+  function makePoly(side: 'left' | 'right'): Poly {
+    const zw    = zoneW();
+    const edges = 3 + Math.floor(Math.random() * 3); // 3 4 5
+    const r     = 38 + Math.random() * 68;
+    const c     = palette[Math.floor(Math.random() * palette.length)];
+    const op    = 0.15;
+    const xMin  = side === 'left' ? -r         : W - zw;
+    const xMax  = side === 'left' ?  zw        : W + r;
+    const verts = makeVerts(edges, r);
+    // Each edge: ~55% chance of a curved side, random inward/outward bulge
+    const curves = verts.map(() =>
+      Math.random() < 0.55
+        ? (Math.random() < 0.5 ? 1 : -1) * r * (0.18 + Math.random() * 0.32)
+        : 0
+    );
+    return {
+      side,
+      verts,
+      curves,
+      r,
+      x:      xMin + Math.random() * (xMax - xMin),
+      y:      Math.random() * H,
+      vx:     (Math.random() - 0.5) * 0.09,
+      vy:     (0.18 + Math.random() * 0.28) * (Math.random() < 0.5 ? 1 : -1),
+      rot:    Math.random() * Math.PI * 2,
+      rotSpd: (Math.random() - 0.5) * 0.0035,
+      fill:   `rgba(${c[0]},${c[1]},${c[2]},${op.toFixed(3)})`,
+      stroke: `rgba(${c[0]},${c[1]},${c[2]},${(op * 0.55).toFixed(3)})`,
+    };
+  }
+
+  function update(p: Poly) {
+    p.x  += p.vx;
+    p.y  += p.vy;
+    p.rot += p.rotSpd;
+
+    // Soft repulsion from inner edge (keep out of center)
+    const edge = innerEdge(p.side);
+    if (p.side === 'left'  && p.x + p.r * 0.4 > edge) p.vx -= 0.018;
+    if (p.side === 'right' && p.x - p.r * 0.4 < edge) p.vx += 0.018;
+
+    // Clamp lateral drift
+    p.vx = Math.max(-0.22, Math.min(0.22, p.vx));
+
+    // Vertical wrap (repeating pattern)
+    if (p.y - p.r >  H + 40) p.y = -p.r - 40;
+    if (p.y + p.r < -40)     p.y =  H + p.r + 40;
+
+    // Outer edge wrap
+    if (p.side === 'left'  && p.x + p.r < -60) p.x = edge - p.r;
+    if (p.side === 'right' && p.x - p.r > W + 60) p.x = edge + p.r;
+  }
+
+  function draw(p: Poly) {
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rot);
+    ctx.beginPath();
+
+    const n = p.verts.length;
+    ctx.moveTo(p.verts[0][0], p.verts[0][1]);
+
+    for (let i = 0; i < n; i++) {
+      const [ax, ay] = p.verts[i];
+      const [bx, by] = p.verts[(i + 1) % n];
+      const curv     = p.curves[i];
+
+      if (curv === 0) {
+        ctx.lineTo(bx, by);
+      } else {
+        // Midpoint of edge
+        const mx = (ax + bx) / 2;
+        const my = (ay + by) / 2;
+        // Unit perpendicular to the edge (rotated 90°)
+        const dx  = bx - ax;
+        const dy  = by - ay;
+        const len = Math.sqrt(dx * dx + dy * dy) || 1;
+        // Control point: midpoint offset perpendicular by curv
+        const cpx = mx + (-dy / len) * curv;
+        const cpy = my + ( dx / len) * curv;
+        ctx.quadraticCurveTo(cpx, cpy, bx, by);
+      }
+    }
+
+    ctx.closePath();
+    ctx.fillStyle   = p.fill;
+    ctx.fill();
+    ctx.strokeStyle = p.stroke;
+    ctx.lineWidth   = 0.7;
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+    polys.forEach(p => { update(p); draw(p); });
+    requestAnimationFrame(frame);
+  }
+
+  function init() {
+    resize();
+    polys = [
+      ...Array.from({ length: EACH }, () => makePoly('left')),
+      ...Array.from({ length: EACH }, () => makePoly('right')),
+    ];
+    requestAnimationFrame(frame);
+  }
+
+  let raf = 0;
+  window.addEventListener('resize', () => {
+    cancelAnimationFrame(raf);
+    resize();
+    polys.forEach(p => {
+      const edge = innerEdge(p.side);
+      if (p.side === 'left'  && p.x > edge) p.x = edge - p.r;
+      if (p.side === 'right' && p.x < edge) p.x = edge + p.r;
+    });
+    raf = requestAnimationFrame(frame);
+  });
+
+  init();
+})();
+</script>

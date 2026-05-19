@@ -1,0 +1,112 @@
+portrait: /images/OnayAkbas_photo.jpg
+
+solo_exhibitions:
+  - { year: "1989",    venue: "Gallery Serio — Paris" }
+  - { year: "1990",    venue: "Centre Culturel Anatolie — Paris" }
+  - { year: "1991",    venue: "Centre Culturel Gérard Philippe — Noisy-le-Sec" }
+  - { year: "1991",    venue: "Gallery Le Chaînon Manquant — Paris" }
+  - { year: "1992",    venue: "Gallery Le Soleil Bleu — Versailles" }
+  - { year: "1992",    venue: "Gallery Serio — Paris" }
+  - { year: "1993",    venue: "Gallery Alkent Actuel Art — Istanbul" }
+  - { year: "1993",    venue: "Centre Culturel de Kadıköy — Istanbul" }
+  - { year: "1994",    venue: "Gallery d'Art Schneider — Winterthur, Zurich" }
+  - { year: "1995",    venue: "Gallery Alkent Actuel Art — Istanbul" }
+  - { year: "1996",    venue: '"10 ans de peinture" — Aubergenville' }
+  - { year: "1996",    venue: "Gallery Le Soleil Bleu — Versailles" }
+  - { year: "1996",    venue: "MAC 2000 — Paris" }
+  - { year: "1996",    venue: "Gallery Alkent Actuel Art — Istanbul" }
+  - { year: "1997",    venue: "MAC 2000 — Paris" }
+  - { year: "1997",    venue: "Gallery Artfakt — Mülheim, Germany" }
+  - { year: "1998",    venue: "MAC 2000 — Paris" }
+  - { year: "1998",    venue: "Gallery Alkent Actuel Art — Istanbul" }
+  - { year: "1998",    venue: "Gallery Fardel — Le Touquet" }
+  - { year: "1999",    venue: "MAC 2000 — Paris" }
+  - { year: "2000",    venue: "Foire Internationale d'Istanbul — avec la Galerie Artist" }
+  - { year: "2000",    venue: "MAC 2000 — Paris" }
+  - { year: "2000",    venue: "Gallery Alkent Actuel Art — Istanbul" }
+  - { year: "2001",    venue: "Gallery Regard Sud — Lyon" }
+  - { year: "2001",    venue: "MAC 2000 — Paris" }
+  - { year: "2001",    venue: "Bebek Art Gallery — Istanbul" }
+  - { year: "2001",    venue: "Halkbank Art Gallery — Ankara" }
+  - { year: "2002",    venue: "MAC 2000 — Paris" }
+  - { year: "2003",    venue: "Gallery Artist — Istanbul" }
+  - { year: "2003",    venue: "Espace d'Art Contemporain L'Autre — Paris" }
+  - { year: "2003",    venue: "MANIF — Seoul, Korea" }
+  - { year: "2004",    venue: "Start — Strasbourg" }
+  - { year: "2004",    venue: "Art Zurich — Zurich" }
+  - { year: "2004",    venue: "MAC 2000 — Paris" }
+  - { year: "2004",    venue: "Foire Internationale d'Istanbul" }
+  - { year: "2005",    venue: "Start — Strasbourg" }
+  - { year: "2005",    venue: "PulsArt — Le Mans" }
+  - { year: "2005",    venue: "ArtNîmes — Nîmes" }
+  - { year: "2005",    venue: "Festival Transméditerranéen — Grasse" }
+  - { year: "2005",    venue: "Foire Internationale d'Istanbul" }
+  - { year: "2006",    venue: "Gallery Çağla Cabaoğlu — Istanbul" }
+  - { year: "2007",    venue: "Nurol Art Gallery — Ankara" }
+  - { year: "2007",    venue: "Gallery Appia — Grenoble" }
+  - { year: "2008",    venue: "Gallery Artist — Berlin" }
+  - { year: "2008",    venue: "Gallery Alkent Actuel Art — Istanbul" }
+  - { year: "2009",    venue: 'Gallery Artist Ankara — "Mes inachevés"' }
+  - { year: "2009",    venue: 'Gallery Regard Sud Lyon — "Mes inachevés"' }
+  - { year: "2010",    venue: 'Gallery Crous Beaux-Arts Paris — "Mes inachevés"' }
+  - { year: "2012",    venue: 'Gallery Wingrow — "One Act · Play" — Taipei, Taiwan' }
+  - { year: "2013",    venue: 'Gallery Artist — "Meine Unvollendeten" — Berlin' }
+  - { year: "2014",    venue: 'Gallery Artist — "Dalga · Wave" — Ankara / Istanbul' }
+  - { year: "2015",    venue: '"Ben, Öteki – Moi, l''Autre" — İzmir, Artiz Gallery' }
+
+group_exhibitions:
+  - { year: "1985",    venue: "Gallery Dört Boyut — Istanbul" }
+  - { year: "1985",    venue: "Musée des Beaux-Arts — Izmir" }
+  - { year: "1986",    venue: "Gallery Dört Boyut — Istanbul" }
+  - { year: "1987",    venue: "Festival de Tourisme et de la Culture — Bandırma" }
+  - { year: "1990",    venue: "Peintres Turcs — AGF, Paris" }
+  - { year: "1991",    venue: "Sept Peintres Turcs — Metz, Nancy" }
+  - { year: "1991",    venue: "Gallery Vive l'Art — Lille" }
+  - { year: "1992",    venue: "Peintres Turcs — Les Halles, Paris" }
+  - { year: "1992",    venue: "Salon d'Automne — Paris" }
+  - { year: "1993",    venue: "Kaléidoscope des Libertés — Lille" }
+  - { year: "1993",    venue: "Gallery Pierre-Marie Vitoux — Paris" }
+  - { year: "1993",    venue: "Gallery Chabin — Paris" }
+  - { year: "1993",    venue: "Gallery Babacar — Paris" }
+  - { year: "1993",    venue: "Treizième Art — Paris" }
+  - { year: "1993",    venue: "Gallery Le Soleil Bleu — Versailles" }
+  - { year: "1994",    venue: "Le Génie de la Bastille — Paris" }
+  - { year: "1996",    venue: "Salon des Artistes au Jardin du Louvre — Paris" }
+  - { year: "1997",    venue: "Gallery Lisette Alibert — Paris" }
+  - { year: "1997",    venue: "Istanbul Art Fair" }
+  - { year: "1997–00", venue: "Galerie Alkent Actuel Art — Istanbul" }
+  - { year: "1998",    venue: "30e Biennale de Langres (guest of honour)" }
+  - { year: "1998",    venue: "Gallery Artist — Istanbul" }
+  - { year: "1999",    venue: "Gallery Artist — Istanbul" }
+  - { year: "2000",    venue: "Art Contemporain Turc — Espace Pierre Cardin, Paris" }
+  - { year: "2002",    venue: "Gallery Drimart — Istanbul" }
+  - { year: "2004",    venue: "MAIF — Niort" }
+  - { year: "2005",    venue: "Start — Strasbourg" }
+  - { year: "2006",    venue: "24e Salon de Villevêque (invited artist)" }
+  - { year: "2009",    venue: "Hommage à Van Gogh — Centre d'Art Contemporain de Beşiktaş, Istanbul" }
+  - { year: "2010",    venue: 'Cité des Arts Paris — "10 Artistes Contemporains Turcs · Frontières Liquides"' }
+  - { year: "2011",    venue: "Ankara Group Art Gallery" }
+  - { year: "2011",    venue: "13 Egeart — Izmir" }
+  - { year: "2013",    venue: "Gallery Wingrow — Taipei, Taiwan" }
+  - { year: "2013",    venue: '"100 Faces of Turkish Painting" — Izmir' }
+  - { year: "2013",    venue: '"90 Artist · 90th Year" — Berlin' }
+  - { year: "2015",    venue: '"Dünyanın Renkleri" — İstanbul, Çağdaş Sanatlar Merkezi' }
+  - { year: "2015",    venue: '"Karşılaşmalar" — İstanbul, İmoga Sanat Galerisi' }
+
+art_fairs:
+  - { year: "1993–94", venue: "Foire Internationale des Galeries Actuelles — Geneva" }
+  - { year: "1995–99", venue: "Foire Internationale d'Art Contemporain — Istanbul" }
+  - { year: "1995–05", venue: "MAC 2000 — Paris (11 consecutive years)" }
+  - { year: "2003–05", venue: "Start — Strasbourg, avec Galerie Alkent Actuel Art" }
+  - { year: "2004",    venue: "Art International Zurich" }
+  - { year: "2004",    venue: "MANIF — Seoul, Korea" }
+  - { year: "2006",    venue: "Art Miami — avec Galerie Paris Athena" }
+  - { year: "2006",    venue: "FIAC — Gallery Artist" }
+  - { year: "2007",    venue: "Contemporary Istanbul — with Gallery Artist" }
+  - { year: "2008",    venue: "Contemporary Istanbul — with Alkent Actuel Art" }
+  - { year: "2013–15", venue: "Contemporary Istanbul — Gallery Artist" }
+
+awards:
+  - { year: "1987", venue: "Bandırma Festival of Culture and Tourism Prize" }
+  - { year: "1990", venue: "Paris Beaujolais Art Awards — First Prize" }
+  - { year: "2014", venue: "Türkiye Gazeteciler Cemiyeti — Sedat Simavi Ödülleri, Görsel Sanatlar" }

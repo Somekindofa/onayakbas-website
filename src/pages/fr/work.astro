@@ -1,0 +1,167 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import fs from 'node:fs';
+import path from 'node:path';
+
+const imagesDir = path.resolve('public/images');
+const all = fs.readdirSync(imagesDir);
+
+const numberedRe = /^(\d+)\.jpg$/i;
+const detailSet  = new Set(
+  all.filter(f => /^\d+E\.jpg$/i.test(f)).map(f => parseInt(f))
+);
+
+const numbered = all
+  .filter(f => numberedRe.test(f))
+  .sort((a, b) => parseInt(a) - parseInt(b))
+  .map(f => {
+    const n = parseInt(f);
+    return {
+      thumb:  `/images/${f}`,
+      full:   detailSet.has(n) ? `/images/${n}E.jpg` : `/images/${f}`,
+      alt:    `Onay Akbaş — N° ${n}`,
+      decade: 'numbered',
+    };
+  });
+
+const datedRe = /^(\d{4})[_ ].+\.(jpg|jpeg)$/i;
+const fsDated = all
+  .filter(f => datedRe.test(f))
+  .map(f => {
+    const y = parseInt(f.slice(0, 4));
+    return {
+      thumb:  `/images/${f}`,
+      full:   `/images/${f}`,
+      alt:    `Onay Akbaş — ${f.replace(/\.(jpg|jpeg)$/i, '').replace(/^(\d{4})[_ ]/, '$1 · ').replace(/[_]/g, ' ')}`,
+      decade: `${Math.floor(y / 10) * 10}s`,
+      _year:  y,
+    };
+  });
+
+const cmsPaintings = await getCollection('paintings');
+const cmsEntries = cmsPaintings.map(p => ({
+  thumb:  p.data.image,
+  full:   p.data.image,
+  alt:    `Onay Akbaş — ${p.data.title ?? p.data.year}`,
+  decade: `${Math.floor(p.data.year / 10) * 10}s`,
+  _year:  p.data.year,
+}));
+
+const dated = [...fsDated, ...cmsEntries]
+  .sort((a, b) => a._year - b._year)
+  .map(p => ({ thumb: p.thumb, full: p.full, alt: p.alt, decade: p.decade }));
+
+const paintings = [...dated, ...numbered];
+const decades = [...new Set(dated.map(p => p.decade))].sort();
+---
+<Layout title="Œuvres — Onay Akbaş" lang="fr">
+  <div class="work-header">
+    <h2 class="page-title">Œuvres</h2>
+    <div class="filters" role="group" aria-label="Filtrer par décennie">
+      <button class="filter-btn active" data-filter="all">Tout</button>
+      {decades.map(d => (
+        <button class="filter-btn" data-filter={d}>{d}</button>
+      ))}
+      <button class="filter-btn" data-filter="numbered">Série</button>
+    </div>
+  </div>
+
+  <div class="grid">
+    {paintings.map((p, i) => (
+      <button
+        class="thumb"
+        data-index={i}
+        data-full={p.full}
+        data-alt={p.alt}
+        data-decade={p.decade}
+        aria-label={`Ouvrir : ${p.alt}`}
+      >
+        <img src={p.thumb} alt={p.alt} loading="lazy" />
+      </button>
+    ))}
+  </div>
+
+  <div id="lb" role="dialog" aria-modal="true" aria-label="Visionneuse" hidden>
+    <button id="lb-close" aria-label="Fermer">&times;</button>
+    <button id="lb-prev" aria-label="Précédent">&#8592;</button>
+    <button id="lb-next" aria-label="Suivant">&#8594;</button>
+    <div id="lb-img-wrap"><img id="lb-img" src="" alt="" /></div>
+    <p id="lb-caption"></p>
+    <p id="lb-counter"></p>
+  </div>
+</Layout>
+
+<style>
+  .work-header { display: flex; align-items: baseline; gap: 2.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
+  .page-title { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 2rem; letter-spacing: 0.08em; flex-shrink: 0; }
+  .filters { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .filter-btn { background: none; border: 1px solid var(--border); color: var(--muted); font-family: 'EB Garamond', serif; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 0.75rem; cursor: pointer; transition: background 0.15s, color 0.15s, border-color 0.15s; border-radius: 2px; }
+  .filter-btn:hover { border-color: var(--teal); color: var(--text); }
+  .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; }
+  .thumb { aspect-ratio: 1; overflow: hidden; background: #e8e4dc; cursor: pointer; border: none; padding: 0; display: block; }
+  .thumb.hidden { display: none; }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; display: block; }
+  .thumb:hover img { transform: scale(1.04); }
+  #lb { position: fixed; inset: 0; background: rgba(10,10,10,0.93); z-index: 1000; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 0.75rem; }
+  #lb[hidden] { display: none; }
+  #lb-img-wrap { max-width: min(90vw, 1100px); max-height: 78vh; display: flex; align-items: center; justify-content: center; }
+  #lb-img { max-width: 100%; max-height: 78vh; object-fit: contain; display: block; }
+  #lb-caption { color: rgba(255,255,255,0.75); font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; font-style: italic; letter-spacing: 0.03em; text-align: center; }
+  #lb-counter { color: rgba(255,255,255,0.35); font-size: 0.7rem; letter-spacing: 0.1em; }
+  #lb-close, #lb-prev, #lb-next { position: fixed; background: none; border: none; color: rgba(255,255,255,0.6); cursor: pointer; font-size: 1.8rem; line-height: 1; padding: 0.75rem; transition: color 0.2s; }
+  #lb-close { top: 1.25rem; right: 1.75rem; font-size: 2.2rem; }
+  #lb-prev  { left: 1.25rem; top: 50%; transform: translateY(-50%); }
+  #lb-next  { right: 1.25rem; top: 50%; transform: translateY(-50%); }
+  #lb-close:hover, #lb-prev:hover, #lb-next:hover { color: #fff; }
+  @media (max-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 768px) { .work-header { flex-direction: column; gap: 1rem; } .grid { grid-template-columns: repeat(2, 1fr); } }
+</style>
+
+<script>
+  const filterBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('.filter-btn'));
+  const thumbs     = Array.from(document.querySelectorAll<HTMLButtonElement>('.thumb'));
+  let activeFilter = 'all';
+  function applyFilter(filter: string) {
+    activeFilter = filter;
+    filterBtns.forEach(b => b.classList.toggle('active', b.dataset.filter === filter));
+    thumbs.forEach(t => t.classList.toggle('hidden', filter !== 'all' && t.dataset.decade !== filter));
+  }
+  filterBtns.forEach(btn => btn.addEventListener('click', () => applyFilter(btn.dataset.filter!)));
+
+  const lb       = document.getElementById('lb') as HTMLDivElement;
+  const lbImg    = document.getElementById('lb-img') as HTMLImageElement;
+  const lbCap    = document.getElementById('lb-caption') as HTMLParagraphElement;
+  const lbCount  = document.getElementById('lb-counter') as HTMLParagraphElement;
+  const btnClose = document.getElementById('lb-close') as HTMLButtonElement;
+  const btnPrev  = document.getElementById('lb-prev')  as HTMLButtonElement;
+  const btnNext  = document.getElementById('lb-next')  as HTMLButtonElement;
+  let current = 0;
+  function visibleThumbs() { return thumbs.filter(t => !t.classList.contains('hidden')); }
+  function show(i: number) {
+    const visible = visibleThumbs();
+    if (!visible.length) return;
+    current = (i + visible.length) % visible.length;
+    const btn = visible[current];
+    lbImg.src = btn.dataset.full!;
+    lbImg.alt = btn.dataset.alt!;
+    lbCap.textContent = btn.dataset.alt!.replace(/^Onay Akbaş — /, '');
+    lbCount.textContent = `${current + 1} / ${visible.length}`;
+    lb.hidden = false;
+    document.body.style.overflow = 'hidden';
+    btnClose.focus();
+  }
+  function close() { lb.hidden = true; document.body.style.overflow = ''; }
+  thumbs.forEach(btn => btn.addEventListener('click', () => show(visibleThumbs().indexOf(btn))));
+  btnClose.addEventListener('click', close);
+  btnPrev.addEventListener('click', () => show(current - 1));
+  btnNext.addEventListener('click', () => show(current + 1));
+  lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
+  document.addEventListener('keydown', (e) => {
+    if (lb.hidden) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft')  show(current - 1);
+    if (e.key === 'ArrowRight') show(current + 1);
+  });
+</script>

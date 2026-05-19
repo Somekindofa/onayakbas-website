@@ -1,0 +1,83 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const all = await getCollection('articles');
+const articles = all
+  .filter(a => a.data.lang === 'fr')
+  .map(a => ({
+    title:  a.data.title,
+    author: a.data.author,
+    desc:   a.data.description,
+    href:   a.data.link ?? a.data.external_url ?? '#',
+  }));
+---
+<Layout title="Articles — Onay Akbaş" lang="fr">
+  <h2 class="page-title">Articles &amp; Textes</h2>
+  <ul class="article-list">
+    {articles.map(a => (
+      <li>
+        <a href={a.href} target="_blank" rel="noopener" class="article-link">
+          <span class="article-title">{a.title}</span>
+          <span class="article-author">{a.author}</span>
+        </a>
+        <p class="article-desc" set:html={a.desc} />
+      </li>
+    ))}
+  </ul>
+</Layout>
+
+<style>
+  .page-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 2rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 2.5rem;
+  }
+
+  .article-list {
+    list-style: none;
+    padding: 0;
+    max-width: 640px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .article-list li {
+    border-bottom: 1px solid var(--border);
+    padding: 1.25rem 0;
+  }
+
+  .article-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    text-decoration: none;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+  }
+
+  .article-link:hover .article-title { text-decoration: underline; }
+
+  .article-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+  }
+
+  .article-author {
+    font-size: 0.8rem;
+    color: var(--muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .article-desc {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+</style>
