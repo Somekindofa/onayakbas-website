@@ -8,22 +8,16 @@ const imagesDir = path.resolve('public/images');
 const all = fs.readdirSync(imagesDir);
 
 const numberedRe = /^(\d+)\.jpg$/i;
-const detailSet  = new Set(
-  all.filter(f => /^\d+E\.jpg$/i.test(f)).map(f => parseInt(f))
-);
 
 const numbered = all
   .filter(f => numberedRe.test(f))
   .sort((a, b) => parseInt(a) - parseInt(b))
-  .map(f => {
-    const n = parseInt(f);
-    return {
-      thumb:  `/images/${f}`,
-      full:   detailSet.has(n) ? `/images/${n}E.jpg` : `/images/${f}`,
-      alt:    `Onay Akbaş — No. ${n}`,
-      decade: 'numbered',
-    };
-  });
+  .map(f => ({
+    thumb:  `/images/${f}`,
+    full:   `/images/${f}`,
+    alt:    `Onay Akbaş — No. ${parseInt(f)}`,
+    decade: 'numbered',
+  }));
 
 const datedRe = /^(\d{4})[_ ].+\.(jpg|jpeg)$/i;
 const fsDated = all
