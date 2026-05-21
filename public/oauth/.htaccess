@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteRule ^auth$     index.php [L,QSA]
+RewriteRule ^callback$ index.php [L,QSA]

@@ -1,0 +1,50 @@
+<?php
+define('GH_CLIENT_ID',     '{{CLIENT_ID}}');
+define('GH_CLIENT_SECRET', '{{CLIENT_SECRET}}');
+define('REDIRECT_URI',     'https://onayakbas.com/oauth/callback');
+
+$path = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+
+if ($path === 'auth') {
+    header('Location: https://github.com/login/oauth/authorize?' . http_build_query([
+        'client_id'    => GH_CLIENT_ID,
+        'redirect_uri' => REDIRECT_URI,
+        'scope'        => 'repo',
+    ]));
+    exit;
+}
+
+if ($path === 'callback') {
+    $code = $_GET['code'] ?? '';
+
+    $context = stream_context_create([
+        'http' => [
+            'method'  => 'POST',
+            'header'  => "Accept: application/json\r\nContent-Type: application/json\r\n",
+            'content' => json_encode([
+                'client_id'     => GH_CLIENT_ID,
+                'client_secret' => GH_CLIENT_SECRET,
+                'code'          => $code,
+                'redirect_uri'  => REDIRECT_URI,
+            ]),
+        ],
+    ]);
+
+    $data = json_decode(
+        file_get_contents('https://github.com/login/oauth/access_token', false, $context),
+        true
+    );
+
+    $msg = isset($data['access_token'])
+        ? 'authorization:github:success:' . json_encode(['token' => $data['access_token'], 'provider' => 'github'])
+        : 'authorization:github:error:'   . json_encode(['message' => $data['error'] ?? 'unknown_error']);
+
+    header('Content-Type: text/html; charset=utf-8');
+    echo '<!doctype html><html><body><script>'
+       . 'window.opener?.postMessage(' . json_encode($msg) . ',"*");'
+       . 'window.close();'
+       . '</script></body></html>';
+    exit;
+}
+
+http_response_code(404);

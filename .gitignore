@@ -5,3 +5,4 @@ dist/
 public/videos/*.mp4
 public/videos/*.mov
 public/videos/*.webm
+public/oauth/index.php

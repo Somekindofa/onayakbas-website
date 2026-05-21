@@ -21,6 +21,20 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Generate OAuth proxy
+        run: |
+          node -e "
+            const fs = require('fs');
+            let tpl = fs.readFileSync('oauth-template/index.php.template', 'utf8');
+            tpl = tpl.replace('{{CLIENT_ID}}', process.env.GH_CLIENT_ID);
+            tpl = tpl.replace('{{CLIENT_SECRET}}', process.env.GH_CLIENT_SECRET);
+            fs.mkdirSync('public/oauth', { recursive: true });
+            fs.writeFileSync('public/oauth/index.php', tpl);
+          "
+        env:
+          GH_CLIENT_ID:     ${{ secrets.GH_CLIENT_ID }}
+          GH_CLIENT_SECRET: ${{ secrets.GH_CLIENT_SECRET }}
+
       - name: Build site
         run: npm run build
 
