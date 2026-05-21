@@ -1,0 +1,178 @@
+  backend:
+    name:      github
+    repo:      Somekindofa/onayakbas-website
+    branch:    main
+    auth_type: pkce
+    app_id:    Ov23liUwpzzvGzzRZF5m
+
+  media_folder:  public/images
+  public_folder: /images
+
+  locale: fr
+
+  collections:
+
+    - name:           paintings
+      label:          "🖼  Tableaux (galerie)"
+      label_singular: "Tableau"
+      description: >
+        Ajoutez un nouveau tableau à la galerie.
+        ⚠ L'ANNÉE EST OBLIGATOIRE — sans elle, le tableau ne s'affichera
+        pas dans le bon filtre par décennie.
+      folder:    src/content/paintings
+      create:    true
+      format:    yaml
+      extension: yaml
+      slug:      "{{image | slug}}"
+      fields:
+
+        - label:    "📷  Photo du tableau"
+          name:     image
+          widget:   image
+          hint:     "Téléchargez la photo du tableau (JPG ou PNG)."
+          required: true
+
+        - label:      "📅  Année de création  ★ OBLIGATOIRE"
+          name:       year
+          widget:     number
+          hint: >
+            Entrez l'année où ce tableau a été peint, ex : 1985.
+            Sans cette information le tableau ne sera pas classé dans
+            la bonne décennie.
+          value_type: int
+          min:        1960
+          max:        2030
+          required:   true
+
+        - label:    "Titre (optionnel)"
+          name:     title
+          widget:   string
+          required: false
+          hint:     "Laissez vide si le tableau n'a pas de titre."
+
+    - name:           articles
+      label:          "📄  Articles & Textes"
+      label_singular: "Article"
+      description: >
+        Ajoutez un texte critique, un essai ou un article sur votre travail.
+      folder:    src/content/articles
+      create:    true
+      format:    yaml
+      extension: yaml
+      slug:      "{{lang}}-{{title | slug}}"
+      fields:
+
+        - label:   "Langue de l'article"
+          name:    lang
+          widget:  select
+          options:
+            - { label: "Français",  value: fr }
+            - { label: "English",   value: en }
+            - { label: "Türkçe",    value: tr }
+          default: fr
+
+        - label:  "Titre"
+          name:   title
+          widget: string
+
+        - label:  "Auteur"
+          name:   author
+          widget: string
+
+        - label:  "Description courte"
+          name:   description
+          widget: string
+
+        - label:        "Fichier (PDF ou HTML)"
+          name:         link
+          widget:       file
+          required:     false
+          media_folder: public/articles
+          public_folder: /articles
+
+        - label:    "Lien externe"
+          name:     external_url
+          widget:   string
+          required: false
+
+    - name:           media
+      label:          "🎬  Médias (vidéos)"
+      label_singular: "Vidéo"
+      folder:    src/content/media
+      create:    true
+      format:    yaml
+      extension: yaml
+      fields:
+
+        - label:   "Type de vidéo"
+          name:    type
+          widget:  select
+          options:
+            - { label: "Vidéo YouTube",        value: youtube }
+            - { label: "Fichier vidéo (MP4)",  value: local   }
+          default: youtube
+
+        - label:    "URL YouTube"
+          name:     youtube_url
+          widget:   string
+          required: false
+          condition:
+            field: type
+            value: youtube
+          hint: "Ex : https://www.youtube.com/watch?v=stgER1NBuAY"
+
+        - label:          "Fichier vidéo"
+          name:           video_file
+          widget:         file
+          required:       false
+          condition:
+            field: type
+            value: local
+          media_folder:   public/videos
+          public_folder:  /videos
+
+        - label:  "Légende"
+          name:   label
+          widget: string
+
+    - name:  bio
+      label: "👤  Biographie — CV"
+      files:
+
+        - label: "Expositions & Prix"
+          name:  bio_events
+          file:  src/content/bio/bio-events.yaml
+          fields:
+
+            - label:    "Photo de profil"
+              name:     portrait
+              widget:   image
+              required: false
+
+            - label: "Expositions solo"
+              name:  solo_exhibitions
+              widget: list
+              fields:
+                - { label: "Année",           name: year,  widget: string }
+                - { label: "Galerie et ville", name: venue, widget: string }
+
+            - label: "Expositions collectives"
+              name:  group_exhibitions
+              widget: list
+              fields:
+                - { label: "Année",           name: year,  widget: string }
+                - { label: "Galerie et ville", name: venue, widget: string }
+
+            - label: "Foires d'art"
+              name:  art_fairs
+              widget: list
+              fields:
+                - { label: "Année",           name: year,  widget: string }
+                - { label: "Galerie et ville", name: venue, widget: string }
+
+            - label: "Prix & distinctions"
+              name:  awards
+              widget: list
+              fields:
+                - { label: "Année", name: year,  widget: string }
+                - { label: "Prix",  name: venue, widget: string }
