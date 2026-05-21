@@ -9,7 +9,7 @@ if ($path === 'auth') {
     header('Location: https://github.com/login/oauth/authorize?' . http_build_query([
         'client_id'    => GH_CLIENT_ID,
         'redirect_uri' => REDIRECT_URI,
-        'scope'        => 'repo',
+        'scope'        => 'repo,read:user',
     ]));
     exit;
 }
@@ -41,8 +41,9 @@ if ($path === 'callback') {
 
     header('Content-Type: text/html; charset=utf-8');
     echo '<!doctype html><html><body><script>'
-       . 'window.opener?.postMessage(' . json_encode($msg) . ',"*");'
-       . 'window.close();'
+       . 'var msg=' . json_encode($msg) . ';'
+       . 'function send(){if(window.opener){window.opener.postMessage(msg,"*");}setTimeout(function(){window.close();},500);}'
+       . 'if(document.readyState==="complete"){send();}else{window.addEventListener("load",send);}'
        . '</script></body></html>';
     exit;
 }
